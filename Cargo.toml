@@ -1,0 +1,25 @@
+[package]
+name = "xodr-qcr"
+version = "0.1.0"
+edition = "2021"
+description = "OpenDRIVE Quality Checker (Rust) - monolithic binary that checks .xodr files"
+license = "MPL-2.0"
+
+[lib]
+name = "xodr_qcr"
+path = "src/lib.rs"
+
+[[bin]]
+name = "xodr-qcr"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+quick-xml = { version = "0.36", features = ["serialize"] }
+roxmltree = "0.19"
+xsd-schema = { version = "0.1.2", features = ["xsd11"] }
+sxd-xpath = "0.4"
+semver = "1"
+nalgebra = "0.33"
+thiserror = "2"
+anyhow = "1"

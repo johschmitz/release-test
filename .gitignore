@@ -1,0 +1,24 @@
+# Rust build artifacts
+/target
+**/*.rs.bk
+
+# Editor / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Reference / vendored repositories (separate git repos, not part of this crate)
+/qc-baselib-py/
+/qc-framework/
+/qc-opendrive/
+/probe_xsd/
+/Clothoids/
+
+# Python venvs (reference tooling)
+.venv/
+.venv-check/
+
+# Diff-test temp outputs
+/tmp/diff_ref.xqar
+/tmp/diff_rust.xqar
