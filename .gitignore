@@ -12,13 +12,8 @@
 /qc-baselib-py/
 /qc-framework/
 /qc-opendrive/
-/probe_xsd/
 /Clothoids/
 
 # Python venvs (reference tooling)
 .venv/
 .venv-check/
-
-# Diff-test temp outputs
-/tmp/diff_ref.xqar
-/tmp/diff_rust.xqar

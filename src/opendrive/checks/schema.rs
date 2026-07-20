@@ -2,10 +2,7 @@
 // Schema validation checker, ported from qc_opendrive/checks/schema/valid_schema.py.
 //
 // Uses the `xsd-schema` crate for both XSD 1.0 (OpenDRIVE 1.4-1.7) and XSD 1.1
-// (OpenDRIVE 1.8). Known limitation: the XSD 1.1 path reports false-positive
-// "abstract type" errors for <junction>; these are filtered out so clean 1.8
-// files validate correctly.
-
+// (OpenDRIVE 1.8).
 use std::path::PathBuf;
 
 use xsd_schema::validation::{CollectingValidationSink, SchemaValidator, ValidationFlags, drive_navigator};
@@ -29,12 +26,6 @@ pub static VALID_SCHEMA: crate::opendrive::checks::CheckerSpec = crate::opendriv
     version_required: false,
     run: valid_schema_run,
 };
-
-/// Errors whose message matches this pattern are XSD 1.1 abstract-type false
-/// positives produced by `xsd-schema` (see PROBE_XSD_RESULTS.md). Filtered out.
-fn is_abstract_type_false_positive(message: &str) -> bool {
-    message.contains("is abstract and cannot be used to validate an element")
-}
 
 fn schema_dir() -> PathBuf {
     // schemas/ lives next to the binary's crate root at runtime; resolve relative
@@ -166,9 +157,6 @@ fn valid_schema_run(cd: &mut CheckerData) {
 
     // Resolve element path -> line/col via roxmltree (engine doesn't give coords).
     for err in &errors {
-        if is_abstract_type_false_positive(&err.message) {
-            continue; // known XSD 1.1 limitation; see PROBE_XSD_RESULTS.md
-        }
         let (row, col) = match &err.element_path {
             Some(path) => resolve_path(&doc, path),
             None => (None, None),

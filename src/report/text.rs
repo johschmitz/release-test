@@ -117,7 +117,7 @@ pub fn write_text_report<W: Write>(result: &Result, w: &mut W) -> std::io::Resul
     p(w, "Rule UID format:", 0)?;
     p(w, "  <emanating-entity>:<standard>:x.y.z:rule_set.for_rules.rule_name", 0)?;
     p(w, "", 0)?;
-    p(w, "Known limitations: see probe_xsd/PROBE_XSD_RESULTS.md (XSD 1.1 abstract-type false positives are filtered).", 0)?;
+    p(w, "Known limitations: none (xsd-schema resolves XSD 1.1 conditional type assignment before the abstract-type check).", 0)?;
 
     Ok(())
 }
